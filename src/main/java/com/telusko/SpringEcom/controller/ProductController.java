@@ -2,6 +2,7 @@ package com.telusko.SpringEcom.controller;
 
 import com.telusko.SpringEcom.model.Product;
 import com.telusko.SpringEcom.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Operation(summary = "Get products", description = "Get all products")
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts(){
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
