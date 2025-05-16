@@ -27,6 +27,7 @@ public class ProductController {
 
     }
 
+    @Operation(summary = "Get product", description = "Get product by id")
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable int id){
         Product product = productService.getProductById(id);
@@ -38,6 +39,7 @@ public class ProductController {
 
     }
 
+    @Operation(summary = "Get image of product", description = "Get image of product by id")
     @GetMapping("product/{productId}/image")
     public ResponseEntity<byte[]> getImageByProductId(@PathVariable int productId){
         Product product = productService.getProductById(productId);
@@ -47,7 +49,7 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
+    @Operation(summary = "Create product", description = "Add a new product")
     @PostMapping("/product")
     public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile){
         Product savedProduct = null;
@@ -59,6 +61,7 @@ public class ProductController {
         }
     }
 
+    @Operation(summary = "Update product", description = "Modify a product by id")
     @PutMapping("/product/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable int id, @RequestPart Product product, @RequestPart MultipartFile imageFile){
         Product updatedProduct = null;
@@ -71,6 +74,7 @@ public class ProductController {
         }
     }
 
+    @Operation(summary = "Delete product", description = "Delete a product by id")
     @DeleteMapping("/product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable int id){
         Product product = productService.getProductById(id);
@@ -84,6 +88,7 @@ public class ProductController {
 
     }
 
+    @Operation(summary = "Search product", description = "Search a product by keyword")
     @GetMapping("/products/search")
     public ResponseEntity<List<Product>> searchProducts(@RequestParam String keyword){
         List<Product> products = productService.searchProducts(keyword);
